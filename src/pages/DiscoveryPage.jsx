@@ -14,6 +14,7 @@ import {
   BookOpen,
   Briefcase
 } from 'lucide-react';
+import { colleges as defaultColleges } from '../data/colleges';
 
 export default function DiscoveryPage({ onOpenApply }) {
   const [selectedCity, setSelectedCity] = useState('All Cities');
@@ -22,64 +23,7 @@ export default function DiscoveryPage({ onOpenApply }) {
   const [comparedColleges, setComparedColleges] = useState([]);
   const [showComparisonModal, setShowComparisonModal] = useState(false);
 
-  const initialColleges = [
-    {
-      id: 'iit-bombay',
-      name: 'Indian Institute of Technology, B',
-      location: 'Powai, Mumbai • Public University',
-      city: 'Mumbai',
-      specialization: 'Engineering',
-      rating: '4.8',
-      image: 'https://images.unsplash.com/photo-1562774053-701939374585?auto=format&fit=crop&w=800&q=80',
-      placements: '₹18.2 LPA',
-      fees: '₹2.4L/Yr',
-      feeValue: 240000,
-      tags: ['Computer Science', 'Electrical', '+12 more'],
-      roiScore: '9.4/10'
-    },
-    {
-      id: 'gba-bangalore',
-      name: 'Global Business Academy',
-      location: 'Electronic City, Bangalore • Private',
-      city: 'Bangalore',
-      specialization: 'Management',
-      rating: '4.6',
-      image: 'https://images.unsplash.com/photo-1541339907198-e08756dedf3f?auto=format&fit=crop&w=800&q=80',
-      placements: '₹12.5 LPA',
-      fees: '₹6.8L/Yr',
-      feeValue: 680000,
-      tags: ['Finance', 'Data Analytics', '+4 more'],
-      roiScore: '8.8/10'
-    },
-    {
-      id: 'nmi-delhi',
-      name: 'National Medical Institute',
-      location: 'Ansari Nagar, Delhi • Government',
-      city: 'Delhi',
-      specialization: 'Medical',
-      rating: '4.7',
-      image: 'https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=800&q=80',
-      placements: '98% (Internship Rate)',
-      fees: '₹12k/Yr',
-      feeValue: 12000,
-      tags: ['MBBS', 'BDS', '+8 more'],
-      roiScore: '9.8/10'
-    },
-    {
-      id: 'iim-ahmedabad',
-      name: 'Indian Institute of Management, A',
-      location: 'Vastrapur, Ahmedabad • Public University',
-      city: 'Ahmedabad',
-      specialization: 'Management',
-      rating: '4.9',
-      image: 'https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=800&q=80',
-      placements: '₹32.0 LPA',
-      fees: '₹11.5L/Yr',
-      feeValue: 1150000,
-      tags: ['MBA / PGP', 'Executive MBA', '+6 more'],
-      roiScore: '9.9/10'
-    }
-  ];
+  const initialColleges = defaultColleges;
 
   const trendingSpecs = [
     { name: 'AI & ML', spec: 'Engineering' },
@@ -151,6 +95,7 @@ export default function DiscoveryPage({ onOpenApply }) {
                   <option value="Bangalore">Bangalore</option>
                   <option value="Delhi">Delhi</option>
                   <option value="Ahmedabad">Ahmedabad</option>
+                  <option value="Pilani">Pilani</option>
                 </select>
               </div>
             </div>
@@ -263,7 +208,7 @@ export default function DiscoveryPage({ onOpenApply }) {
                   <button
                     key={idx}
                     onClick={() => setSelectedSpec(item.spec)}
-                    className="px-3 py-1.5 text-xs font-semibold rounded-full bg-teal-50 hover:bg-teal-100 text-teal-700 border border-teal-200/70 transition-colors"
+                    className="px-3 py-1.5 text-xs font-semibold rounded-full bg-teal-50 hover:bg-teal-100 text-teal-700 border border-teal-200/70 transition-colors cursor-pointer"
                   >
                     {item.name}
                   </button>
@@ -284,6 +229,7 @@ export default function DiscoveryPage({ onOpenApply }) {
                 return (
                   <div
                     key={college.id}
+                    id={college.slug}
                     className="bg-white rounded-3xl overflow-hidden border border-slate-200/80 shadow-card card-hover-effect flex flex-col justify-between group relative"
                   >
                     <div>
@@ -350,7 +296,7 @@ export default function DiscoveryPage({ onOpenApply }) {
                     <div className="p-5 pt-0 flex items-center gap-2">
                       <button
                         onClick={() => onOpenApply(`College Profile: ${college.name}`)}
-                        className="flex-1 py-2.5 text-xs font-bold text-brand-600 hover:text-white bg-white hover:bg-brand-600 border border-brand-200 rounded-xl transition-all text-center"
+                        className="flex-1 py-2.5 text-xs font-bold text-brand-600 hover:text-white bg-white hover:bg-brand-600 border border-brand-200 rounded-xl transition-all text-center cursor-pointer"
                       >
                         View Details
                       </button>
@@ -358,7 +304,7 @@ export default function DiscoveryPage({ onOpenApply }) {
                       <button
                         onClick={() => toggleCompare(college)}
                         title={isCompared ? 'Remove from compare' : 'Add to compare'}
-                        className={`p-2.5 rounded-xl text-xs font-bold border transition-colors ${
+                        className={`p-2.5 rounded-xl text-xs font-bold border transition-colors cursor-pointer ${
                           isCompared
                             ? 'bg-brand-600 text-white border-brand-600'
                             : 'bg-slate-50 text-slate-600 hover:bg-slate-100 border-slate-200'
@@ -372,7 +318,7 @@ export default function DiscoveryPage({ onOpenApply }) {
                 );
               })}
 
-              {/* Card 4: Smart Comparison Tool Widget */}
+              {/* Card: Smart Comparison Tool Widget */}
               <div className="bg-gradient-to-br from-blue-50/80 via-white to-blue-50/50 rounded-3xl p-6 border border-brand-200/80 shadow-card flex flex-col justify-between relative overflow-hidden">
                 
                 {/* Background Ripple */}
@@ -420,7 +366,7 @@ export default function DiscoveryPage({ onOpenApply }) {
                         onOpenApply('College Comparison Tool');
                       }
                     }}
-                    className="w-full py-3 px-4 bg-[#0047d4] hover:bg-[#003bb3] text-white font-bold text-xs sm:text-sm rounded-xl shadow-md transition-all text-center"
+                    className="w-full py-3 px-4 bg-[#0047d4] hover:bg-[#003bb3] text-white font-bold text-xs sm:text-sm rounded-xl shadow-md transition-all text-center cursor-pointer"
                   >
                     Start Comparing
                   </button>
@@ -447,7 +393,7 @@ export default function DiscoveryPage({ onOpenApply }) {
               </div>
               <button
                 onClick={() => setShowComparisonModal(false)}
-                className="text-xs font-bold text-slate-400 hover:text-slate-700"
+                className="text-xs font-bold text-slate-400 hover:text-slate-700 cursor-pointer"
               >
                 Close
               </button>
@@ -469,7 +415,7 @@ export default function DiscoveryPage({ onOpenApply }) {
                 setShowComparisonModal(false);
                 onOpenApply('Full College Comparison Report');
               }}
-              className="w-full py-3 bg-brand-600 text-white font-bold text-xs rounded-xl shadow-md"
+              className="w-full py-3 bg-brand-600 hover:bg-brand-700 text-white font-bold text-xs rounded-xl shadow-md cursor-pointer transition-colors"
             >
               Request Full Comparison Report
             </button>
