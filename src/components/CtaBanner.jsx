@@ -1,3 +1,15 @@
+/**
+ * @file CtaBanner.jsx
+ * @description Full-width gradient call-to-action banner near the bottom of the homepage.
+ * Features a bold headline, subtitle, and two action buttons:
+ * - "Apply for Programs" (primary white button)
+ * - "Partner With Us" (secondary glass button)
+ * Both trigger the global consultation modal via onOpenApply.
+ *
+ * @param {Object} props
+ * @param {(programName?: string) => void} props.onOpenApply - Opens the consultation modal
+ */
+
 import React from 'react';
 import { ArrowRight, Sparkles, Handshake } from 'lucide-react';
 
@@ -6,16 +18,16 @@ export default function CtaBanner({ onOpenApply }) {
     <section className="py-14 md:py-20 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
-        {/* Banner Container */}
+        {/* Gradient Banner Container — brand blue to blue-700 gradient with orb decorations */}
         <div className="relative rounded-3xl md:rounded-4xl bg-gradient-to-r from-brand-700 via-brand-600 to-blue-700 p-8 sm:p-12 lg:p-16 text-center text-white shadow-2xl shadow-brand-700/20 overflow-hidden">
           
-          {/* Decorative Subtle Background Orbs */}
+          {/* Decorative Background Orbs — subtle depth effect */}
           <div className="absolute top-0 right-0 -mt-12 -mr-12 w-64 h-64 bg-white/10 rounded-full blur-2xl pointer-events-none" />
           <div className="absolute bottom-0 left-0 -mb-12 -ml-12 w-64 h-64 bg-blue-400/20 rounded-full blur-2xl pointer-events-none" />
 
           <div className="relative z-10 max-w-3xl mx-auto space-y-6">
             
-            {/* Tag */}
+            {/* Section Tag */}
             <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/15 backdrop-blur-md border border-white/20 text-white text-xs font-semibold uppercase tracking-wider">
               <Sparkles className="w-3.5 h-3.5 text-blue-200" />
               <span>Take The Next Step</span>
@@ -31,8 +43,9 @@ export default function CtaBanner({ onOpenApply }) {
               Join thousands of students and launch your dream career today with leading companies hiring now.
             </p>
 
-            {/* Buttons */}
+            {/* Dual Action Buttons */}
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4">
+              {/* Primary CTA — Inverted white button */}
               <button
                 onClick={() => onOpenApply('Apply for Programs')}
                 className="w-full sm:w-auto inline-flex items-center justify-center px-8 py-3.5 text-base font-bold text-brand-700 bg-white hover:bg-slate-50 rounded-xl shadow-lg hover:shadow-xl hover:-translate-y-0.5 transition-all duration-200"
@@ -41,6 +54,7 @@ export default function CtaBanner({ onOpenApply }) {
                 <ArrowRight className="w-4 h-4 ml-2" />
               </button>
 
+              {/* Secondary CTA — Glassmorphism outline button */}
               <button
                 onClick={() => onOpenApply('Partner With Us')}
                 className="w-full sm:w-auto inline-flex items-center justify-center px-8 py-3.5 text-base font-bold text-white bg-white/15 hover:bg-white/25 border border-white/30 backdrop-blur-md rounded-xl hover:-translate-y-0.5 transition-all duration-200"

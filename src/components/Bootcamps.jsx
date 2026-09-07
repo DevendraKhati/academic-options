@@ -1,3 +1,18 @@
+/**
+ * @file Bootcamps.jsx
+ * @description "Advanced Training Bootcamps" section with 4 bootcamp cards:
+ *   1. Digital Marketing (8 weeks)
+ *   2. AI & Machine Learning (12 weeks)
+ *   3. Node.js Backend (10 weeks)
+ *   4. Full Stack Web (12 weeks)
+ *
+ * Each card displays: icon, title, description, duration, format,
+ * 3 curriculum highlight bullets, and a "Learn More" CTA link.
+ *
+ * @param {Object} props
+ * @param {(programName?: string) => void} props.onOpenApply - Opens the consultation modal
+ */
+
 import React from 'react';
 import { 
   Megaphone, 

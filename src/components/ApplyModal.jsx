@@ -1,7 +1,22 @@
+/**
+ * @file ApplyModal.jsx
+ * @description Pixel-accurate "Get in Touch" popup modal based on the Figma design.
+ * Handles student/partner inquiries, free consultation bookings, and program applications
+ * with input validation and a feedback confirmation state.
+ */
+
 import React, { useState, useEffect } from 'react';
 import { X, ShieldCheck, ArrowRight, CheckCircle2, ChevronDown } from 'lucide-react';
 
+/**
+ * @typedef {Object} ApplyModalProps
+ * @property {boolean} isOpen - Whether the modal is currently visible.
+ * @property {() => void} onClose - Callback function to close the modal.
+ * @property {string} [initialProgram] - Optional context or program title passed from the trigger button.
+ */
+
 export default function ApplyModal({ isOpen, onClose, initialProgram = '' }) {
+  // Form input field values
   const [formData, setFormData] = useState({
     fullName: '',
     email: '',
@@ -10,8 +25,10 @@ export default function ApplyModal({ isOpen, onClose, initialProgram = '' }) {
     message: ''
   });
 
+  // Controls the post-submission success view
   const [submitted, setSubmitted] = useState(false);
 
+  // Synchronize the initial program context into the dropdown selection
   useEffect(() => {
     if (initialProgram) {
       if (initialProgram.toLowerCase().includes('consultation')) {
@@ -30,11 +47,18 @@ export default function ApplyModal({ isOpen, onClose, initialProgram = '' }) {
 
   if (!isOpen) return null;
 
+  /**
+   * Handles form submission and triggers the success confirmation screen.
+   * In production, this can be connected to an API endpoint, Formspree, or CRM.
+   */
   const handleSubmit = (e) => {
     e.preventDefault();
     setSubmitted(true);
   };
 
+  /**
+   * Resets form state and triggers the parent onClose callback.
+   */
   const handleClose = () => {
     setSubmitted(false);
     setFormData({
@@ -51,10 +75,12 @@ export default function ApplyModal({ isOpen, onClose, initialProgram = '' }) {
     <div 
       className="fixed inset-0 z-50 overflow-y-auto bg-slate-900/50 backdrop-blur-sm flex items-center justify-center p-4 sm:p-6 animate-in fade-in duration-200"
       onClick={handleClose}
+      role="dialog"
+      aria-modal="true"
     >
       <div 
         className="bg-[#f3f4f6] rounded-[28px] max-w-[560px] w-full p-6 sm:p-10 shadow-2xl border border-slate-200/80 relative overflow-hidden text-slate-800"
-        onClick={(e) => e.stopPropagation()}
+        onClick={(e) => e.stopPropagation()} // Prevent backdrop click from closing when clicking inside
       >
         
         {/* Close Button */}
@@ -67,24 +93,27 @@ export default function ApplyModal({ isOpen, onClose, initialProgram = '' }) {
         </button>
 
         {submitted ? (
+          /* Success Screen */
           <div className="py-10 text-center space-y-4">
             <div className="w-16 h-16 rounded-2xl bg-emerald-100 text-emerald-600 border border-emerald-300 flex items-center justify-center mx-auto shadow-sm">
               <CheckCircle2 className="w-8 h-8" />
             </div>
             <h3 className="text-2xl font-extrabold text-slate-900">Thank You!</h3>
             <p className="text-sm text-slate-600 max-w-sm mx-auto leading-relaxed">
-              Your inquiry has been received. Our team will get in touch with you shortly at <span className="font-semibold text-brand-600">{formData.email}</span>.
+              Your inquiry has been received. Our admissions mentor will get in touch with you shortly at{' '}
+              <span className="font-semibold text-brand-600">{formData.email}</span>.
             </p>
             <div className="pt-4">
               <button
                 onClick={handleClose}
-                className="px-6 py-3 bg-brand-600 hover:bg-brand-700 text-white font-bold text-sm rounded-xl shadow-md transition-all"
+                className="px-6 py-3 bg-brand-600 hover:bg-brand-700 text-white font-bold text-sm rounded-xl shadow-md transition-all cursor-pointer"
               >
                 Done
               </button>
             </div>
           </div>
         ) : (
+          /* Form Screen */
           <div className="space-y-6">
             
             {/* Modal Header */}
@@ -92,7 +121,7 @@ export default function ApplyModal({ isOpen, onClose, initialProgram = '' }) {
               {/* Brand Logo Row */}
               <div className="flex items-center gap-2 mb-3">
                 {/* 6-dot Asterisk Logo Icon */}
-                <svg className="w-5 h-5 text-brand-600 fill-current" viewBox="0 0 24 24">
+                <svg className="w-5 h-5 text-brand-600 fill-current" viewBox="0 0 24 24" aria-hidden="true">
                   <circle cx="12" cy="4" r="2.2" />
                   <circle cx="12" cy="20" r="2.2" />
                   <circle cx="5" cy="8" r="2.2" />
@@ -111,13 +140,13 @@ export default function ApplyModal({ isOpen, onClose, initialProgram = '' }) {
                 Get in Touch
               </h2>
 
-              {/* Description */}
+              {/* Subtitle */}
               <p className="text-sm text-slate-500 mt-1.5 leading-relaxed font-normal">
                 Bridging the gap between ambition and opportunity. Start your journey with us today.
               </p>
             </div>
 
-            {/* Form */}
+            {/* Form Inputs */}
             <form onSubmit={handleSubmit} className="space-y-4">
               
               {/* Row 1: Full Name & Email Address */}
@@ -191,7 +220,7 @@ export default function ApplyModal({ isOpen, onClose, initialProgram = '' }) {
                 </div>
               </div>
 
-              {/* Row 3: Message */}
+              {/* Row 3: Message Textarea */}
               <div>
                 <label className="block text-xs sm:text-sm font-semibold text-slate-800 mb-1.5">
                   Message
@@ -220,7 +249,7 @@ export default function ApplyModal({ isOpen, onClose, initialProgram = '' }) {
               <div className="pt-2">
                 <button
                   type="submit"
-                  className="w-full py-3.5 px-6 bg-[#0047d4] hover:bg-[#003bb3] active:bg-[#003299] text-white font-bold text-sm sm:text-base rounded-xl shadow-md shadow-blue-600/25 hover:shadow-lg transition-all duration-200 flex items-center justify-center gap-2 group"
+                  className="w-full py-3.5 px-6 bg-[#0047d4] hover:bg-[#003bb3] active:bg-[#003299] text-white font-bold text-sm sm:text-base rounded-xl shadow-md shadow-blue-600/25 hover:shadow-lg transition-all duration-200 flex items-center justify-center gap-2 group cursor-pointer"
                 >
                   <span>Secure Your Spot</span>
                   <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />

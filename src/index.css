@@ -1,7 +1,21 @@
+/**
+ * @file index.css
+ * @description Global stylesheet for Academic Options.
+ * Contains Tailwind CSS directives, custom background patterns,
+ * glassmorphism effects, card hover animations, and scrollbar styling.
+ * All custom classes here are referenced across multiple components.
+ */
+
+/* Tailwind CSS Layer Imports */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+/**
+ * Base Layer Overrides
+ * Sets the global body defaults: light slate background, dark text,
+ * font smoothing, and OpenType font feature toggles for Plus Jakarta Sans.
+ */
 @layer base {
   body {
     @apply bg-[#f8fafc] text-slate-900 antialiased overflow-x-hidden;
@@ -9,7 +23,11 @@
   }
 }
 
-/* Custom modern subtle dot and grid backgrounds */
+/**
+ * Background Pattern: Grid
+ * Used in section backgrounds for subtle visual texture.
+ * Creates a 32x32px repeating grid of light slate lines.
+ */
 .bg-grid-pattern {
   background-size: 32px 32px;
   background-image: 
@@ -17,12 +35,21 @@
     linear-gradient(to bottom, rgba(226, 232, 240, 0.6) 1px, transparent 1px);
 }
 
+/**
+ * Background Pattern: Dots
+ * Used in the Ecosystem section as a subtle brand-colored dot matrix.
+ * Creates a 24x24px repeating pattern of small blue dots.
+ */
 .bg-dot-pattern {
   background-size: 24px 24px;
   background-image: radial-gradient(rgba(37, 99, 235, 0.12) 1.5px, transparent 1.5px);
 }
 
-/* Glassmorphism effects */
+/**
+ * Glassmorphism: Panel
+ * Semi-transparent white panel with blur effect.
+ * Used for floating overlay cards and modal backdrops.
+ */
 .glass-panel {
   background: rgba(255, 255, 255, 0.85);
   backdrop-filter: blur(12px);
@@ -30,6 +57,11 @@
   border: 1px solid rgba(255, 255, 255, 0.8);
 }
 
+/**
+ * Glassmorphism: Navigation Bar
+ * Higher opacity and stronger blur for the sticky header.
+ * Applied when user scrolls past 20px (controlled by Navbar.jsx).
+ */
 .glass-nav {
   background: rgba(255, 255, 255, 0.92);
   backdrop-filter: blur(16px);
@@ -37,7 +69,11 @@
   border-bottom: 1px solid rgba(226, 232, 240, 0.8);
 }
 
-/* Card hover animation */
+/**
+ * Card Hover Animation
+ * Applies a smooth upward lift (-4px) and enhanced shadow on hover.
+ * Used on all interactive card components across the site.
+ */
 .card-hover-effect {
   transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
 }
@@ -47,20 +83,24 @@
   box-shadow: 0 16px 32px -8px rgba(15, 23, 42, 0.08), 0 4px 12px -2px rgba(15, 23, 42, 0.04);
 }
 
-/* Smooth custom scrollbar */
+/**
+ * Custom Webkit Scrollbar
+ * Matches the site's slate color scheme for a polished native feel.
+ * Only applies to Webkit-based browsers (Chrome, Safari, Edge).
+ */
 ::-webkit-scrollbar {
   width: 8px;
 }
 
 ::-webkit-scrollbar-track {
-  background: #f1f5f9;
+  background: #f1f5f9;   /* slate-100 */
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #cbd5e1;
+  background: #cbd5e1;   /* slate-300 */
   border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #94a3b8;
+  background: #94a3b8;   /* slate-400 */
 }

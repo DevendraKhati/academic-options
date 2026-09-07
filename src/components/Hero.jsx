@@ -1,3 +1,15 @@
+/**
+ * @file Hero.jsx
+ * @description Homepage hero section — the first thing visitors see.
+ * Features an animated "Applications Open" pill badge, brand headline with
+ * underlined "Gap" keyword, dual CTA buttons (Explore Programs + Book Consultation),
+ * trust badges, a corporate studio image with live cohort status,
+ * and the floating 94% Placement Rate metric card.
+ *
+ * @param {Object} props
+ * @param {(programName?: string) => void} props.onOpenApply - Opens the consultation modal
+ */
+
 import React from 'react';
 import { 
   Sparkles, 
@@ -15,23 +27,25 @@ export default function Hero({ onOpenApply }) {
   return (
     <section className="relative pt-28 pb-16 md:pt-36 md:pb-24 overflow-hidden bg-gradient-to-b from-blue-50/50 via-white to-slate-50/50">
       
-      {/* Background Decorative Glows */}
+      {/* Background Decorative Glows — Large blurred circles for depth */}
       <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-gradient-to-tr from-brand-200/40 via-blue-100/30 to-teal-100/30 rounded-full blur-3xl pointer-events-none -z-10" />
       <div className="absolute top-20 right-10 w-72 h-72 bg-brand-100/40 rounded-full blur-2xl pointer-events-none -z-10" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
           
-          {/* Left Content Column */}
+          {/* ============================================
+              LEFT COLUMN: Text Content & CTAs
+              ============================================ */}
           <div className="lg:col-span-6 space-y-6 text-center lg:text-left">
             
-            {/* Pill Badge */}
+            {/* Animated Pill Badge — draws attention to open applications */}
             <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-brand-50 border border-brand-200/80 shadow-sm text-brand-700 text-xs sm:text-sm font-semibold animate-pulse">
               <Sparkles className="w-4 h-4 text-brand-600" />
               <span>Next Cohort Applications Now Open</span>
             </div>
 
-            {/* Headline */}
+            {/* Main Headline — "Bridging the Gap" with underlined keyword */}
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-slate-900 leading-[1.15]">
               Bridging the{' '}
               <span className="text-brand-600 relative inline-block">
@@ -41,12 +55,12 @@ export default function Hero({ onOpenApply }) {
               between Ambition and Opportunity.
             </h1>
 
-            {/* Subheading */}
+            {/* Supporting Subheading */}
             <p className="text-base sm:text-lg text-slate-600 max-w-xl mx-auto lg:mx-0 leading-relaxed font-normal">
               Empowering graduates with real-world skills, industry-ready experience, and top tier placement pathways. Join fast-growing companies and accelerate your career journey.
             </p>
 
-            {/* CTA Buttons */}
+            {/* Dual CTA Buttons — Primary (filled) + Secondary (outlined) */}
             <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 pt-2">
               <button
                 onClick={() => onOpenApply('Explore Programs')}
@@ -65,7 +79,7 @@ export default function Hero({ onOpenApply }) {
               </button>
             </div>
 
-            {/* Trust Badges */}
+            {/* Trust Badges — 3 verification points for credibility */}
             <div className="pt-4 flex flex-wrap items-center justify-center lg:justify-start gap-6 text-xs text-slate-500 font-medium">
               <div className="flex items-center gap-1.5">
                 <CheckCircle2 className="w-4 h-4 text-emerald-500" />
@@ -83,13 +97,14 @@ export default function Hero({ onOpenApply }) {
 
           </div>
 
-          {/* Right Hero Visual Column */}
+          {/* ============================================
+              RIGHT COLUMN: Hero Visual & Floating Cards
+              ============================================ */}
           <div className="lg:col-span-6 relative">
             
-            {/* Visual Container */}
             <div className="relative mx-auto max-w-lg lg:max-w-none">
               
-              {/* Main Visual Card with Office/Studio Presentation */}
+              {/* Main Hero Image Card — Corporate innovation hub photo */}
               <div className="relative rounded-3xl overflow-hidden shadow-2xl border-4 border-white/80 bg-slate-900 group">
                 <img 
                   src="https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=1200&q=80" 
@@ -99,10 +114,10 @@ export default function Hero({ onOpenApply }) {
                   fetchPriority="high"
                 />
                 
-                {/* Modern Gradient Overlay */}
+                {/* Gradient overlay for text readability */}
                 <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-slate-900/20 to-transparent" />
 
-                {/* Overlaid Banner Badge */}
+                {/* Top-left: Live studio status badge with pulsing dot */}
                 <div className="absolute top-4 left-4 bg-white/90 backdrop-blur-md px-3.5 py-1.5 rounded-full border border-white/50 shadow-sm flex items-center gap-2">
                   <div className="w-2 h-2 rounded-full bg-emerald-500 animate-ping"></div>
                   <span className="text-xs font-bold text-slate-800 tracking-wide uppercase">
@@ -110,13 +125,13 @@ export default function Hero({ onOpenApply }) {
                   </span>
                 </div>
 
-                {/* Live Cohort Status Tag */}
+                {/* Top-right: Active cohort indicator */}
                 <div className="absolute top-4 right-4 bg-brand-600/90 backdrop-blur-md text-white px-3 py-1 rounded-full text-xs font-semibold shadow-sm flex items-center gap-1.5">
                   <Users className="w-3.5 h-3.5" />
                   <span>Spring 2026 Active</span>
                 </div>
 
-                {/* Bottom Card Summary */}
+                {/* Bottom overlay: Partner network summary card */}
                 <div className="absolute bottom-4 right-4 left-4 p-4 rounded-2xl bg-white/90 backdrop-blur-md border border-white/60 shadow-lg flex items-center justify-between">
                   <div className="flex items-center gap-3">
                     <div className="w-10 h-10 rounded-xl bg-brand-50 border border-brand-200 flex items-center justify-center text-brand-600">
@@ -135,7 +150,7 @@ export default function Hero({ onOpenApply }) {
 
               </div>
 
-              {/* Floating Metric Card (Left Overlay) */}
+              {/* Floating Metric Card — 94% Placement Rate (positioned bottom-left, overlaps image) */}
               <div className="absolute -bottom-6 -left-4 sm:-left-6 bg-white/95 backdrop-blur-lg p-4 sm:p-5 rounded-2xl shadow-xl border border-slate-100 flex items-center gap-3.5 max-w-[260px] animate-bounce-subtle">
                 <div className="w-12 h-12 rounded-xl bg-emerald-50 border border-emerald-200 flex items-center justify-center text-emerald-600 shrink-0">
                   <Award className="w-6 h-6" />

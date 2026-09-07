@@ -1,3 +1,19 @@
+/**
+ * @file Footer.jsx
+ * @description Global multi-column footer rendered on every page.
+ * Contains 5 columns:
+ *   1. Brand info — Logo, description, and 5 social media icon links (LinkedIn, X, GitHub, Instagram, YouTube)
+ *   2. Navigation — Links to Home, About, Internship Pathways, Bootcamps, Ecosystem
+ *   3. Programs — Links to specific programs (Web Dev, Data Science, Marketing, UI/UX, ESG Hub)
+ *   4. Legal — Privacy Policy, Terms of Service, Cookie Policy, Careers
+ *   5. Get in Touch — Email, phone, and location with Lucide icons
+ *
+ * Bottom bar shows copyright year (dynamic) and quick links including Contact Us modal trigger.
+ *
+ * @param {Object} props
+ * @param {(programName?: string) => void} [props.onOpenApply] - Optional: opens the consultation modal
+ */
+
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { 

@@ -1,3 +1,18 @@
+/**
+ * @file Categories.jsx
+ * @description "Explore Internship Categories" section with 6 interactive category cards
+ * and filter pill tabs. Categories include: Web Development, Data Science,
+ * Digital Marketing, Business Development, UI/UX Design, and Content Writing.
+ *
+ * Features:
+ * - Filter pills (All, Engineering, Data, Marketing, Business, Design)
+ * - Each card shows icon, title, description, skill chips, and active openings count
+ * - Clicking a card triggers the consultation modal with the category pre-selected
+ *
+ * @param {Object} props
+ * @param {(programName?: string) => void} props.onOpenApply - Opens the consultation modal
+ */
+
 import React, { useState } from 'react';
 import { 
   Code2, 

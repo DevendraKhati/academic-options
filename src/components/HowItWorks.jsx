@@ -1,3 +1,19 @@
+/**
+ * @file HowItWorks.jsx
+ * @description "From Classroom to Corporate" 6-step journey roadmap section.
+ * Displays the student pathway as a visual step-by-step process:
+ *
+ * Step 01: Registration & Assessment
+ * Step 02: Immersive Training
+ * Step 03: Live Projects
+ * Step 04: Certification
+ * Step 05: Interview Preparation
+ * Step 06: Direct Placement
+ *
+ * Layout: 6-column grid on desktop, 2-column on tablet, single-column on mobile.
+ * Each step card has an icon that changes color on hover for visual progression.
+ */
+
 import React from 'react';
 import { 
   UserCheck, 

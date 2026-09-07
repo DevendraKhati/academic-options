@@ -1,3 +1,15 @@
+/**
+ * @file Testimonials.jsx
+ * @description "What Our Interns Say" success stories section with 3 testimonial cards.
+ * Each card features: user avatar photo, name, role, company placed at,
+ * a verified badge, an italic quote, and a 5-star rating.
+ *
+ * Testimonials are from:
+ *   - Amit Chen (Software Engineering Intern → CloudTech Labs)
+ *   - Priya Sharma (Data Analyst Trainee → Nexus Analytics)
+ *   - David Nguyen (Digital Marketing Specialist → GrowthWave Media)
+ */
+
 import React from 'react';
 import { Star, Quote, MessageSquareHeart, CheckCircle2 } from 'lucide-react';
 

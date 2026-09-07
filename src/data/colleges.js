@@ -1,3 +1,12 @@
+/**
+ * @file colleges.js
+ * @description Centralized university database used by:
+ * 1. College Discovery Engine (`/discovery`) - to render dynamic stacked university cards
+ * 2. Automated Sitemap Generator (`scripts/generate-sitemap.js`) - to auto-index university anchor links in `sitemap.xml`
+ * 
+ * To add a new university to the website, simply append a new object to this array.
+ */
+
 export const colleges = [
   {
     id: 'iit-bombay',

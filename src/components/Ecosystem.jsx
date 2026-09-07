@@ -1,3 +1,16 @@
+/**
+ * @file Ecosystem.jsx
+ * @description "Our Ecosystem" section on the homepage using a responsive Bento Grid layout.
+ * Displays 4 core pillar cards in an asymmetric grid:
+ *   1. Campus to Cubicle (C2C) — 7 cols, with watermark rocket icon
+ *   2. ESG Hub — 5 cols, mint gradient with sustainability progress bar
+ *   3. Bootcamps — 5 cols, with feature bullet checkmarks
+ *   4. Social Awareness — 7 cols, with thumbnail image and CTA
+ *
+ * @param {Object} props
+ * @param {(programName?: string) => void} props.onOpenApply - Opens the consultation modal
+ */
+
 import React from 'react';
 import { 
   Rocket, 
