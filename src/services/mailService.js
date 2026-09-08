@@ -56,9 +56,21 @@ export async function submitFormToEmail({ formName, replyTo, data }) {
     }
 
     const result = await response.json();
+    const isSuccess = result.success === true || result.success === 'true';
+
+    // Handle initial one-time activation message gracefully
+    if (!isSuccess && (result.message?.toLowerCase().includes('activation') || result.message?.toLowerCase().includes('activate'))) {
+      console.warn('FormSubmit activation notice:', result.message);
+      return {
+        success: true,
+        needsActivation: true,
+        message: result.message
+      };
+    }
+
     return {
-      success: true,
-      message: result.message || 'Submission sent successfully.'
+      success: isSuccess,
+      message: result.message || (isSuccess ? 'Submission sent successfully.' : 'Unable to submit the form.')
     };
   } catch (error) {
     console.error('Error in submitFormToEmail:', error);
