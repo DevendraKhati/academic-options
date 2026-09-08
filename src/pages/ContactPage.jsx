@@ -1,7 +1,8 @@
 /**
  * @file ContactPage.jsx
  * @description "Get in Touch" contact page.
- * Includes a contact form, physical address/contact info, and a FAQ accordion.
+ * Includes an automated contact form forwarding to business@vakyalabs.com,
+ * physical address/contact info, and a FAQ accordion.
  * 
  * @param {Object} props
  * @param {(programName?: string) => void} props.onOpenApply - Opens the consultation modal
@@ -9,11 +10,25 @@
 
 import React, { useState } from 'react';
 import { Helmet } from 'react-helmet-async';
-import { MapPin, Phone, Mail, ChevronDown } from 'lucide-react';
+import { MapPin, Phone, Mail, ChevronDown, CheckCircle2, AlertCircle, Loader2 } from 'lucide-react';
+import { submitFormToEmail } from '../services/mailService';
 
 export default function ContactPage({ onOpenApply }) {
   // State for FAQ accordion
   const [openFaq, setOpenFaq] = useState(null);
+
+  // Form input state
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    subject: '',
+    message: ''
+  });
+
+  // Submission lifecycle state
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitSuccess, setSubmitSuccess] = useState(false);
+  const [submitError, setSubmitError] = useState('');
 
   const faqs = [
     {
@@ -22,7 +37,7 @@ export default function ContactPage({ onOpenApply }) {
     },
     {
       question: "How do I partner with Academic Options?",
-      企业: "We are always looking for industry partners! Please fill out the contact form above with the subject 'Partnership Inquiry', or email us directly. Our partnerships team will get back to you within 24 hours."
+      answer: "We are always looking for industry partners! Please fill out the contact form above with the subject 'Partnership Inquiry', or email us directly. Our partnerships team will get back to you within 24 hours."
     },
     {
       question: "Are the programs available internationally?",
@@ -34,11 +49,36 @@ export default function ContactPage({ onOpenApply }) {
     setOpenFaq(openFaq === index ? null : index);
   };
 
-  const handleFormSubmit = (e) => {
+  const handleFormSubmit = async (e) => {
     e.preventDefault();
-    // Simulate form submission
-    alert("Thank you for your message! We will get back to you soon.");
-    e.target.reset();
+    setIsSubmitting(true);
+    setSubmitError('');
+    setSubmitSuccess(false);
+
+    const result = await submitFormToEmail({
+      formName: 'Contact Us Form',
+      replyTo: formData.email,
+      data: {
+        'Full Name': formData.name,
+        'Email Address': formData.email,
+        'Subject / Inquiry': formData.subject,
+        'Message': formData.message
+      }
+    });
+
+    setIsSubmitting(false);
+
+    if (result.success) {
+      setSubmitSuccess(true);
+      setFormData({
+        name: '',
+        email: '',
+        subject: '',
+        message: ''
+      });
+    } else {
+      setSubmitError(result.message || 'Unable to submit your message. Please try again.');
+    }
   };
 
   return (
@@ -67,6 +107,30 @@ export default function ContactPage({ onOpenApply }) {
           {/* Left Column: Contact Form */}
           <div className="lg:col-span-7 bg-white rounded-3xl p-8 sm:p-10 shadow-card border border-slate-100">
             <h2 className="text-3xl font-bold text-brand-600 mb-8">Send a Message</h2>
+
+            {/* Success Feedback Banner */}
+            {submitSuccess && (
+              <div className="mb-6 p-4 rounded-2xl bg-emerald-50 border border-emerald-200 text-emerald-800 flex items-start gap-3 animate-in fade-in">
+                <CheckCircle2 className="w-5 h-5 text-emerald-600 shrink-0 mt-0.5" />
+                <div>
+                  <div className="font-bold text-sm">Message Sent Successfully!</div>
+                  <div className="text-xs text-emerald-700 mt-0.5">
+                    Thank you for reaching out. We have received your inquiry and our team will get back to you shortly.
+                  </div>
+                </div>
+              </div>
+            )}
+
+            {/* Error Feedback Banner */}
+            {submitError && (
+              <div className="mb-6 p-4 rounded-2xl bg-rose-50 border border-rose-200 text-rose-800 flex items-start gap-3 animate-in fade-in">
+                <AlertCircle className="w-5 h-5 text-rose-600 shrink-0 mt-0.5" />
+                <div>
+                  <div className="font-bold text-sm">Submission Error</div>
+                  <div className="text-xs text-rose-700 mt-0.5">{submitError}</div>
+                </div>
+              </div>
+            )}
             
             <form onSubmit={handleFormSubmit} className="space-y-6">
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
@@ -76,6 +140,8 @@ export default function ContactPage({ onOpenApply }) {
                     type="text" 
                     id="name" 
                     required
+                    value={formData.name}
+                    onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                     className="w-full px-4 py-3 rounded-xl bg-slate-50 border border-slate-200 focus:outline-none focus:ring-2 focus:ring-brand-500/50 focus:border-brand-500 transition-colors"
                     placeholder="John Doe"
                   />
@@ -86,6 +152,8 @@ export default function ContactPage({ onOpenApply }) {
                     type="email" 
                     id="email" 
                     required
+                    value={formData.email}
+                    onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                     className="w-full px-4 py-3 rounded-xl bg-slate-50 border border-slate-200 focus:outline-none focus:ring-2 focus:ring-brand-500/50 focus:border-brand-500 transition-colors"
                     placeholder="john@example.com"
                   />
@@ -94,16 +162,21 @@ export default function ContactPage({ onOpenApply }) {
 
               <div className="space-y-2">
                 <label htmlFor="subject" className="block text-sm font-semibold text-slate-700">Subject</label>
-                <select 
-                  id="subject" 
-                  required
-                  className="w-full px-4 py-3 rounded-xl bg-slate-50 border border-slate-200 focus:outline-none focus:ring-2 focus:ring-brand-500/50 focus:border-brand-500 transition-colors appearance-none"
-                >
-                  <option value="">Select a subject...</option>
-                  <option value="Student Inquiry">Student Inquiry</option>
-                  <option value="Partnership Inquiry">Partnership Inquiry</option>
-                  <option value="General Support">General Support</option>
-                </select>
+                <div className="relative">
+                  <select 
+                    id="subject" 
+                    required
+                    value={formData.subject}
+                    onChange={(e) => setFormData({ ...formData, subject: e.target.value })}
+                    className="w-full px-4 py-3 rounded-xl bg-slate-50 border border-slate-200 focus:outline-none focus:ring-2 focus:ring-brand-500/50 focus:border-brand-500 transition-colors appearance-none pr-10 cursor-pointer"
+                  >
+                    <option value="">Select a subject...</option>
+                    <option value="Student Inquiry">Student Inquiry</option>
+                    <option value="Partnership Inquiry">Partnership Inquiry</option>
+                    <option value="General Support">General Support</option>
+                  </select>
+                  <ChevronDown className="w-4 h-4 text-slate-400 absolute right-3.5 top-1/2 -translate-y-1/2 pointer-events-none" />
+                </div>
               </div>
 
               <div className="space-y-2">
@@ -112,6 +185,8 @@ export default function ContactPage({ onOpenApply }) {
                   id="message" 
                   rows={5}
                   required
+                  value={formData.message}
+                  onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                   className="w-full px-4 py-3 rounded-xl bg-slate-50 border border-slate-200 focus:outline-none focus:ring-2 focus:ring-brand-500/50 focus:border-brand-500 transition-colors resize-none"
                   placeholder="How can we help you?"
                 ></textarea>
@@ -119,9 +194,19 @@ export default function ContactPage({ onOpenApply }) {
 
               <button 
                 type="submit"
-                className="w-full py-4 px-6 text-white bg-brand-600 hover:bg-brand-700 font-bold rounded-xl shadow-lg shadow-brand-600/20 hover:shadow-xl hover:shadow-brand-600/30 transition-all duration-200 hover:-translate-y-0.5"
+                disabled={isSubmitting}
+                className={`w-full py-4 px-6 text-white bg-brand-600 hover:bg-brand-700 font-bold rounded-xl shadow-lg shadow-brand-600/20 hover:shadow-xl hover:shadow-brand-600/30 transition-all duration-200 flex items-center justify-center gap-2 ${
+                  isSubmitting ? 'opacity-70 cursor-not-allowed' : 'hover:-translate-y-0.5 cursor-pointer'
+                }`}
               >
-                Send Message
+                {isSubmitting ? (
+                  <>
+                    <Loader2 className="w-5 h-5 animate-spin" />
+                    <span>Sending Message...</span>
+                  </>
+                ) : (
+                  <span>Send Message</span>
+                )}
               </button>
             </form>
           </div>
@@ -187,7 +272,7 @@ export default function ContactPage({ onOpenApply }) {
               >
                 <button 
                   onClick={() => toggleFaq(index)}
-                  className="w-full flex items-center justify-between p-5 sm:p-6 text-left focus:outline-none"
+                  className="w-full flex items-center justify-between p-5 sm:p-6 text-left focus:outline-none cursor-pointer"
                 >
                   <span className="font-bold text-slate-800">{faq.question}</span>
                   <ChevronDown className={`w-5 h-5 text-slate-400 transition-transform duration-300 ${openFaq === index ? 'rotate-180' : ''}`} />
@@ -197,7 +282,7 @@ export default function ContactPage({ onOpenApply }) {
                   className={`overflow-hidden transition-all duration-300 ease-in-out ${openFaq === index ? 'max-h-48 opacity-100' : 'max-h-0 opacity-0'}`}
                 >
                   <div className="p-5 sm:p-6 pt-0 text-slate-600 leading-relaxed border-t border-slate-100">
-                    {faq.answer || faq.企业}
+                    {faq.answer}
                   </div>
                 </div>
               </div>

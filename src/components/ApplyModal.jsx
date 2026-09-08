@@ -6,7 +6,8 @@
  */
 
 import React, { useState, useEffect } from 'react';
-import { X, ShieldCheck, ArrowRight, CheckCircle2, ChevronDown } from 'lucide-react';
+import { X, ShieldCheck, ArrowRight, CheckCircle2, ChevronDown, Loader2, AlertCircle } from 'lucide-react';
+import { submitFormToEmail } from '../services/mailService';
 
 /**
  * @typedef {Object} ApplyModalProps
@@ -25,7 +26,9 @@ export default function ApplyModal({ isOpen, onClose, initialProgram = '' }) {
     message: ''
   });
 
-  // Controls the post-submission success view
+  // Controls submission lifecycle
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState('');
   const [submitted, setSubmitted] = useState(false);
 
   // Synchronize the initial program context into the dropdown selection
@@ -48,12 +51,32 @@ export default function ApplyModal({ isOpen, onClose, initialProgram = '' }) {
   if (!isOpen) return null;
 
   /**
-   * Handles form submission and triggers the success confirmation screen.
-   * In production, this can be connected to an API endpoint, Formspree, or CRM.
+   * Handles form submission and triggers automated email dispatch to business@vakyalabs.com
    */
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    setSubmitted(true);
+    setIsSubmitting(true);
+    setSubmitError('');
+
+    const result = await submitFormToEmail({
+      formName: 'Consultation & Application Form',
+      replyTo: formData.email,
+      data: {
+        'Full Name': formData.fullName,
+        'Email Address': formData.email,
+        'Phone Number': formData.phone || 'Not provided',
+        'Inquiry Type': formData.inquiryType,
+        'Message': formData.message || 'No additional message provided'
+      }
+    });
+
+    setIsSubmitting(false);
+
+    if (result.success) {
+      setSubmitted(true);
+    } else {
+      setSubmitError(result.message || 'Unable to submit your application. Please try again.');
+    }
   };
 
   /**
@@ -61,6 +84,8 @@ export default function ApplyModal({ isOpen, onClose, initialProgram = '' }) {
    */
   const handleClose = () => {
     setSubmitted(false);
+    setIsSubmitting(false);
+    setSubmitError('');
     setFormData({
       fullName: '',
       email: '',
@@ -120,19 +145,11 @@ export default function ApplyModal({ isOpen, onClose, initialProgram = '' }) {
             <div>
               {/* Brand Logo Row */}
               <div className="flex items-center gap-2 mb-3">
-                {/* 6-dot Asterisk Logo Icon */}
-                <svg className="w-5 h-5 text-brand-600 fill-current" viewBox="0 0 24 24" aria-hidden="true">
-                  <circle cx="12" cy="4" r="2.2" />
-                  <circle cx="12" cy="20" r="2.2" />
-                  <circle cx="5" cy="8" r="2.2" />
-                  <circle cx="19" cy="16" r="2.2" />
-                  <circle cx="5" cy="16" r="2.2" />
-                  <circle cx="19" cy="8" r="2.2" />
-                  <circle cx="12" cy="12" r="1.8" />
-                </svg>
-                <span className="text-base font-bold text-brand-600 tracking-tight">
-                  Academic Options
-                </span>
+                <img 
+                  src="/logo.png" 
+                  alt="Academic Options" 
+                  className="h-8 w-auto object-contain"
+                />
               </div>
 
               {/* Title */}
@@ -245,14 +262,34 @@ export default function ApplyModal({ isOpen, onClose, initialProgram = '' }) {
                 </span>
               </div>
 
+              {/* Error Message Notification */}
+              {submitError && (
+                <div className="p-3.5 rounded-xl bg-rose-50 border border-rose-200 text-rose-700 text-xs sm:text-sm flex items-start gap-2 animate-in fade-in">
+                  <AlertCircle className="w-4 h-4 text-rose-600 shrink-0 mt-0.5" />
+                  <span>{submitError}</span>
+                </div>
+              )}
+
               {/* Submit CTA Button */}
               <div className="pt-2">
                 <button
                   type="submit"
-                  className="w-full py-3.5 px-6 bg-[#0047d4] hover:bg-[#003bb3] active:bg-[#003299] text-white font-bold text-sm sm:text-base rounded-xl shadow-md shadow-blue-600/25 hover:shadow-lg transition-all duration-200 flex items-center justify-center gap-2 group cursor-pointer"
+                  disabled={isSubmitting}
+                  className={`w-full py-3.5 px-6 bg-[#0047d4] hover:bg-[#003bb3] active:bg-[#003299] text-white font-bold text-sm sm:text-base rounded-xl shadow-md shadow-blue-600/25 hover:shadow-lg transition-all duration-200 flex items-center justify-center gap-2 group ${
+                    isSubmitting ? 'opacity-70 cursor-not-allowed' : 'cursor-pointer'
+                  }`}
                 >
-                  <span>Secure Your Spot</span>
-                  <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                  {isSubmitting ? (
+                    <>
+                      <Loader2 className="w-5 h-5 animate-spin" />
+                      <span>Sending Inquiry...</span>
+                    </>
+                  ) : (
+                    <>
+                      <span>Secure Your Spot</span>
+                      <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                    </>
+                  )}
                 </button>
               </div>
 
