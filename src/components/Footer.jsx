@@ -72,7 +72,7 @@ export default function Footer({ onOpenApply }) {
               <li><Link to="/about" className="hover:text-brand-600 transition-colors">About Us</Link></li>
               <li><Link to="/contact" className="hover:text-brand-600 transition-colors">Contact Us</Link></li>
               <li><Link to="/#programs" className="hover:text-brand-600 transition-colors">Internship Pathways</Link></li>
-              <li><Link to="/#bootcamps" className="hover:text-brand-600 transition-colors">Advanced Bootcamps</Link></li>
+              <li><Link to="/bootcamps" className="hover:text-brand-600 transition-colors">Technical Bootcamps</Link></li>
               <li><Link to="/#ecosystem" className="hover:text-brand-600 transition-colors">Our Ecosystem</Link></li>
             </ul>
           </div>

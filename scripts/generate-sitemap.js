@@ -87,6 +87,7 @@ User-agent: *
 # Allow public-facing pages and assets
 Allow: /
 Allow: /about
+Allow: /bootcamps
 Allow: /discovery
 Allow: /impact
 Allow: /contact

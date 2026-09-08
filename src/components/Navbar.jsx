@@ -61,7 +61,7 @@ export default function Navbar({ onOpenApply }) {
 
   // Primary navigation item definitions
   const navLinks = [
-    { name: 'Bootcamps', path: '/#bootcamps' },
+    { name: 'Bootcamps', path: '/bootcamps' },
     { name: 'Launchpad', path: '/#programs' },
     { name: 'B2B SaaS', path: '/#ecosystem' },
     { name: 'Discovery', path: '/discovery' },

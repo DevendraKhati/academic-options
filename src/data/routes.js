@@ -38,5 +38,10 @@ export const staticRoutes = [
     path: '/discovery',
     changefreq: 'daily',
     priority: '0.9'
+  },
+  {
+    path: '/bootcamps',
+    changefreq: 'weekly',
+    priority: '0.9'
   }
 ];

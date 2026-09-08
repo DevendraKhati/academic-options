@@ -25,6 +25,7 @@ const AboutPage = lazy(() => import('./pages/AboutPage'));
 const ImpactPage = lazy(() => import('./pages/ImpactPage'));
 const DiscoveryPage = lazy(() => import('./pages/DiscoveryPage'));
 const ContactPage = lazy(() => import('./pages/ContactPage'));
+const BootcampPage = lazy(() => import('./pages/BootcampPage'));
 
 /**
  * Lightweight fallback spinner displayed during route transitions
@@ -88,6 +89,9 @@ export default function App() {
 
               {/* College Discovery Engine Page (Stacked University Cards & Comparison Tool) */}
               <Route path="/discovery" element={<DiscoveryPage onOpenApply={handleOpenApply} />} />
+
+              {/* Technical Bootcamps Page (Engineering tracks, curriculum, outcomes) */}
+              <Route path="/bootcamps" element={<BootcampPage onOpenApply={handleOpenApply} />} />
 
               {/* Fallback Catch-all Route redirects to HomePage */}
               <Route path="*" element={<HomePage onOpenApply={handleOpenApply} />} />
