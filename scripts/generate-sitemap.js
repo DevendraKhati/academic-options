@@ -1,3 +1,16 @@
+/**
+ * @file generate-sitemap.js
+ * @description Build-time script to automatically generate `sitemap.xml` and `robots.txt`.
+ * 
+ * Flow:
+ * 1. Reads static routes from `src/data/routes.js`.
+ * 2. Reads dynamic university data from `src/data/colleges.js`.
+ * 3. Generates XML for the sitemap and writes it to `public/sitemap.xml`.
+ * 4. Generates a basic `public/robots.txt` pointing to the sitemap.
+ * 
+ * This runs automatically before `vite build` via the package.json scripts.
+ */
+
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';

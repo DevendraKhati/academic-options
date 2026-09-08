@@ -66,7 +66,8 @@ export default function Navbar({ onOpenApply }) {
     { name: 'B2B SaaS', path: '/#ecosystem' },
     { name: 'Discovery', path: '/discovery' },
     { name: 'Impact', path: '/impact' },
-    { name: 'About', path: '/about' }
+    { name: 'About', path: '/about' },
+    { name: 'Contact', path: '/contact' }
   ];
 
   /**
@@ -88,20 +89,11 @@ export default function Navbar({ onOpenApply }) {
           
           {/* Brand Logo & Emblem */}
           <Link to="/" className="flex items-center gap-2.5 group shrink-0">
-            <div className="w-9 h-9 rounded-xl bg-gradient-to-tr from-brand-700 to-brand-500 flex items-center justify-center text-white shadow-md shadow-brand-500/20 group-hover:scale-105 transition-transform duration-200">
-              <svg className="w-5 h-5 text-white fill-current" viewBox="0 0 24 24" aria-hidden="true">
-                <circle cx="12" cy="4" r="2.2" />
-                <circle cx="12" cy="20" r="2.2" />
-                <circle cx="5" cy="8" r="2.2" />
-                <circle cx="19" cy="16" r="2.2" />
-                <circle cx="5" cy="16" r="2.2" />
-                <circle cx="19" cy="8" r="2.2" />
-                <circle cx="12" cy="12" r="1.8" />
-              </svg>
-            </div>
-            <span className="text-lg font-bold tracking-tight text-slate-900 group-hover:text-brand-600 transition-colors">
-              Academic Options
-            </span>
+            <img 
+              src="/logo.png" 
+              alt="Academic Options Logo" 
+              className="h-10 sm:h-12 w-auto object-contain transition-transform duration-200 group-hover:scale-105" 
+            />
           </Link>
 
           {/* Desktop Navigation Links */}

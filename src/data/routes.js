@@ -30,6 +30,11 @@ export const staticRoutes = [
     priority: '0.8'
   },
   {
+    path: '/contact',
+    changefreq: 'monthly',
+    priority: '0.8'
+  },
+  {
     path: '/discovery',
     changefreq: 'daily',
     priority: '0.9'

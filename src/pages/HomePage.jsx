@@ -19,6 +19,7 @@
  */
 
 import React from 'react';
+import { Helmet } from 'react-helmet-async';
 import Hero from '../components/Hero';
 import Ecosystem from '../components/Ecosystem';
 import Stats from '../components/Stats';
@@ -31,6 +32,13 @@ import CtaBanner from '../components/CtaBanner';
 export default function HomePage({ onOpenApply }) {
   return (
     <>
+      <Helmet>
+        <title>Academic Options | Classroom to Corporate</title>
+        <meta name="description" content="Bridging the gap between ambition and opportunity. Empowering graduates with real-world skills, industry-ready experience, and top tier placement pathways." />
+        <meta name="keywords" content="internships, bootcamps, college placement, tech training, esg hub, academic options" />
+        <link rel="canonical" href="https://academicoptions.com/" />
+      </Helmet>
+      
       {/* Each section passes onOpenApply through for modal triggers */}
       <Hero onOpenApply={handleOpenApply => onOpenApply(handleOpenApply)} />
       <Ecosystem onOpenApply={handleOpenApply => onOpenApply(handleOpenApply)} />

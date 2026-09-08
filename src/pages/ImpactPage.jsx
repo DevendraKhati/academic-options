@@ -1,3 +1,18 @@
+/**
+ * @file ImpactPage.jsx
+ * @description "Social Impact & Programs" page highlighting community and student initiatives.
+ * 
+ * Sections:
+ * 1. Hero — Highlighting the goal of empowering 100K+ students.
+ * 2. Awareness & Well-being — Mindful Campus & Eco-Bridge initiatives.
+ * 3. College Discovery Preview — Filterable list of top partnered universities.
+ * 4. Olympiads — Math/Science and Coding competitions for early talent.
+ * 5. Honorary Doctorate — Recognition program for exceptional contributors.
+ * 
+ * @param {Object} props
+ * @param {(programName?: string) => void} props.onOpenApply - Opens the consultation modal
+ */
+
 import React, { useState } from 'react';
 import { 
   Sparkles, 

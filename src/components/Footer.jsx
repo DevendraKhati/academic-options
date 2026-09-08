@@ -33,21 +33,12 @@ export default function Footer({ onOpenApply }) {
           
           {/* Col 1: Brand Info (Spans 4 cols) */}
           <div className="col-span-2 md:col-span-4 space-y-4">
-            <Link to="/" className="flex items-center gap-2.5">
-              <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-brand-700 to-brand-500 flex items-center justify-center text-white shadow-md shadow-brand-500/20">
-                <svg className="w-5 h-5 text-white fill-current" viewBox="0 0 24 24">
-                  <circle cx="12" cy="4" r="2.2" />
-                  <circle cx="12" cy="20" r="2.2" />
-                  <circle cx="5" cy="8" r="2.2" />
-                  <circle cx="19" cy="16" r="2.2" />
-                  <circle cx="5" cy="16" r="2.2" />
-                  <circle cx="19" cy="8" r="2.2" />
-                  <circle cx="12" cy="12" r="1.8" />
-                </svg>
-              </div>
-              <span className="text-xl font-bold tracking-tight text-slate-900">
-                Academic Options
-              </span>
+            <Link to="/" className="flex items-center gap-2.5 inline-block">
+              <img 
+                src="/logo.png" 
+                alt="Academic Options Logo" 
+                className="h-10 sm:h-12 w-auto object-contain" 
+              />
             </Link>
             <p className="text-sm text-slate-500 leading-relaxed max-w-sm">
               Bridging the gap between ambitious talent and top-tier global enterprise opportunities through world-class training and direct corporate pathways.
@@ -79,6 +70,7 @@ export default function Footer({ onOpenApply }) {
             <ul className="space-y-2 text-sm">
               <li><Link to="/" className="hover:text-brand-600 transition-colors">Home</Link></li>
               <li><Link to="/about" className="hover:text-brand-600 transition-colors">About Us</Link></li>
+              <li><Link to="/contact" className="hover:text-brand-600 transition-colors">Contact Us</Link></li>
               <li><Link to="/#programs" className="hover:text-brand-600 transition-colors">Internship Pathways</Link></li>
               <li><Link to="/#bootcamps" className="hover:text-brand-600 transition-colors">Advanced Bootcamps</Link></li>
               <li><Link to="/#ecosystem" className="hover:text-brand-600 transition-colors">Our Ecosystem</Link></li>
@@ -120,15 +112,15 @@ export default function Footer({ onOpenApply }) {
             <ul className="space-y-2.5 text-xs sm:text-sm">
               <li className="flex items-start gap-2">
                 <Mail className="w-4 h-4 text-brand-600 mt-0.5 shrink-0" />
-                <span className="text-slate-600 break-all">admissions@academicoptions.org</span>
+                <span className="text-slate-600 break-all">hello@academicoptions.com</span>
               </li>
               <li className="flex items-start gap-2">
                 <Phone className="w-4 h-4 text-brand-600 mt-0.5 shrink-0" />
-                <span className="text-slate-600">+1 (555) 019-2834</span>
+                <span className="text-slate-600">+91-7303261295</span>
               </li>
               <li className="flex items-start gap-2">
                 <MapPin className="w-4 h-4 text-brand-600 mt-0.5 shrink-0" />
-                <span className="text-slate-600">London & Global Hubs</span>
+                <span className="text-slate-600">Adil Nagar, Kalyanpur, Lucknow 22022</span>
               </li>
             </ul>
           </div>

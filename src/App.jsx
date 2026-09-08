@@ -15,6 +15,7 @@ import HomePage from './pages/HomePage';
 import AboutPage from './pages/AboutPage';
 import ImpactPage from './pages/ImpactPage';
 import DiscoveryPage from './pages/DiscoveryPage';
+import ContactPage from './pages/ContactPage';
 
 export default function App() {
   // Global state to manage the "Get in Touch" / Apply consultation modal
@@ -56,6 +57,9 @@ export default function App() {
 
             {/* About Us Page (Mission, Timeline, Leadership, Values) */}
             <Route path="/about" element={<AboutPage onOpenApply={handleOpenApply} />} />
+
+            {/* Contact Us Page */}
+            <Route path="/contact" element={<ContactPage onOpenApply={handleOpenApply} />} />
 
             {/* Social Impact & Programs Page (Well-being, Olympiads, Honorary Doctorates) */}
             <Route path="/impact" element={<ImpactPage onOpenApply={handleOpenApply} />} />
