@@ -113,13 +113,13 @@ export default function ContactPage({ onOpenApply }) {
         "@type": "ListItem",
         "position": 1,
         "name": "Home",
-        "item": "https://academicoptions.com/"
+        "item": "https://academicoption.in/"
       },
       {
         "@type": "ListItem",
         "position": 2,
         "name": "Contact Us",
-        "item": "https://academicoptions.com/contact"
+        "item": "https://academicoption.in/contact"
       }
     ]
   };
@@ -135,21 +135,21 @@ export default function ContactPage({ onOpenApply }) {
           name="description" 
           content="Get in touch with Academic Options. Visit our Lucknow center, call +91-7303261295, or send an inquiry for bootcamps, partnerships, and admissions counseling." 
         />
-        <link rel="canonical" href="https://academicoptions.com/contact" />
+        <link rel="canonical" href="https://academicoption.in/contact" />
 
         {/* Open Graph Meta Tags */}
         <meta property="og:title" content="Contact Academic Options | Lucknow Office & Inquiries" />
         <meta property="og:description" content="Get in touch with Academic Options. Connect with our team for student bootcamps, enterprise partnerships, and career counseling." />
         <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://academicoptions.com/contact" />
-        <meta property="og:image" content="https://academicoptions.com/logo.png" />
+        <meta property="og:url" content="https://academicoption.in/contact" />
+        <meta property="og:image" content="https://academicoption.in/logo.png" />
         <meta property="og:site_name" content="Academic Options" />
 
         {/* Twitter Card Meta Tags */}
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="Contact Academic Options | Lucknow Office" />
         <meta name="twitter:description" content="Reach out to Academic Options for career development, enterprise partnerships, and admissions counseling." />
-        <meta name="twitter:image" content="https://academicoptions.com/logo.png" />
+        <meta name="twitter:image" content="https://academicoption.in/logo.png" />
 
         {/* Google Rich FAQ & Breadcrumb Structured Data */}
         <script type="application/ld+json">

@@ -90,7 +90,7 @@ export default function DiscoveryPage({ onOpenApply }) {
     "@context": "https://schema.org",
     "@type": "CollectionPage",
     "name": "College Discovery Engine - Academic Options",
-    "url": "https://academicoptions.com/discovery",
+    "url": "https://academicoption.in/discovery",
     "description": "Explore and compare top colleges in India by fees, location, exams, and placement rates.",
     "mainEntity": {
       "@type": "ItemList",
@@ -119,13 +119,13 @@ export default function DiscoveryPage({ onOpenApply }) {
         "@type": "ListItem",
         "position": 1,
         "name": "Home",
-        "item": "https://academicoptions.com/"
+        "item": "https://academicoption.in/"
       },
       {
         "@type": "ListItem",
         "position": 2,
         "name": "College Discovery",
-        "item": "https://academicoptions.com/discovery"
+        "item": "https://academicoption.in/discovery"
       }
     ]
   };
@@ -141,21 +141,21 @@ export default function DiscoveryPage({ onOpenApply }) {
           name="description" 
           content="Compare accredited colleges in India by fees, location, exams, and placement rates. Explore IITs, IIMs, and BITS Pilani with real career outcomes data." 
         />
-        <link rel="canonical" href="https://academicoptions.com/discovery" />
+        <link rel="canonical" href="https://academicoption.in/discovery" />
 
         {/* Open Graph Meta Tags */}
         <meta property="og:title" content="College Discovery Engine | Compare Top Indian Universities" />
         <meta property="og:description" content="Compare accredited colleges in India by fees, location, exams, and placement rates with verified data." />
         <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://academicoptions.com/discovery" />
-        <meta property="og:image" content="https://academicoptions.com/logo.png" />
+        <meta property="og:url" content="https://academicoption.in/discovery" />
+        <meta property="og:image" content="https://academicoption.in/logo.png" />
         <meta property="og:site_name" content="Academic Options" />
 
         {/* Twitter Card Meta Tags */}
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="College Discovery Engine | Academic Options" />
         <meta name="twitter:description" content="Find and compare your ideal university in India using our intelligent data engine." />
-        <meta name="twitter:image" content="https://academicoptions.com/logo.png" />
+        <meta name="twitter:image" content="https://academicoption.in/logo.png" />
 
         {/* Structured Data for Google Indexing */}
         <script type="application/ld+json">

@@ -1,5 +1,33 @@
-User-agent: *
-Allow: /
+# ==============================================================================
+# Robots.txt for Academic Options (https://academicoption.in)
+# Optimized for Google, Bing, and major search engine crawlers
+# ==============================================================================
 
-# Sitemap
-Sitemap: https://academicoptions.org/sitemap.xml
+User-agent: *
+
+# Allow public-facing pages and assets
+Allow: /
+Allow: /about
+Allow: /discovery
+Allow: /impact
+Allow: /contact
+Allow: /assets/
+Allow: /favicon.png
+Allow: /logo.png
+
+# Disallow access to security configs, source files, and internal directories
+Disallow: /_headers
+Disallow: /_redirects
+Disallow: /scripts/
+Disallow: /src/
+Disallow: /node_modules/
+Disallow: /*.json$
+Disallow: /*.lock$
+Disallow: /*.md$
+Disallow: /*.config.js$
+Disallow: /*?*preview=*
+Disallow: /api/
+Disallow: /admin/
+
+# Search Engine XML Sitemap
+Sitemap: https://academicoption.in/sitemap.xml
