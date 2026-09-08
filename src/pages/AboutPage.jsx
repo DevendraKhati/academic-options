@@ -1,4 +1,25 @@
+/**
+ * @file AboutPage.jsx
+ * @description "About Us" page detailing the company's journey, values, and leadership.
+ * 
+ * Sections:
+ * 1. Hero — Mission statement and skybridge visual.
+ * 2. Journey Timeline — Milestones (2014, 2018, 2024).
+ * 3. Core Values — Integrity, Innovation, Community.
+ * 4. Visionaries — Leadership profiles with social links.
+ * 5. Impact Map — Global network statistics and visual map.
+ * 
+ * SEO Optimization (Google Helpful Content & E-E-A-T Standards):
+ * - Targeted page title and high-intent meta description
+ * - BreadcrumbList and AboutPage Schema.org structured data
+ * - Open Graph and Twitter Card tags
+ * 
+ * @param {Object} props
+ * @param {(programName?: string) => void} props.onOpenApply - Opens the consultation modal
+ */
+
 import React from 'react';
+import { Helmet } from 'react-helmet-async';
 import { 
   ShieldCheck, 
   Compass, 
@@ -58,15 +79,15 @@ export default function AboutPage({ onOpenApply }) {
     },
     {
       name: 'Gavin Carr',
-      role: 'CHIEF TECHNOLOGY OFFICER',
-      bio: 'Lead architect of our proprietary AI-matching engine, previously engineering core systems at top-tier Silicon Valley firms.',
+      role: 'DIRECTOR OF TECHNOLOGY',
+      bio: 'Architecting scalable platforms connecting students to corporate mentors and real-world project portfolios.',
       image: 'https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=600&q=80'
     },
     {
-      name: 'Sarah Jenkins',
-      role: 'DIRECTOR OF MENTORSHIP',
-      bio: 'Expert in pedagogical design, Sarah oversees our network of 500+ industry practitioners and mentors across 12 sectors.',
-      image: 'https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&w=600&q=80'
+      name: 'Amara Okafor',
+      role: 'HEAD OF STUDENT ADVOCACY',
+      bio: 'Championing equitable access and mental wellness throughout the intensive transition into corporate ecosystems.',
+      image: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=600&q=80'
     }
   ];
 
@@ -77,8 +98,75 @@ export default function AboutPage({ onOpenApply }) {
     { number: '45', label: 'Countries Reached' }
   ];
 
+  // Breadcrumb & AboutPage structured data for Google E-E-A-T signals
+  const aboutStructuredData = {
+    "@context": "https://schema.org",
+    "@type": "AboutPage",
+    "name": "About Academic Options",
+    "url": "https://academicoptions.com/about",
+    "description": "Learn about Academic Options, our 10-year history, core values of integrity and innovation, and our corporate placement leadership.",
+    "mainEntity": {
+      "@type": "Organization",
+      "name": "Academic Options",
+      "url": "https://academicoptions.com",
+      "logo": "https://academicoptions.com/logo.png"
+    }
+  };
+
+  const breadcrumbData = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://academicoptions.com/"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "About Us",
+        "item": "https://academicoptions.com/about"
+      }
+    ]
+  };
+
   return (
     <div className="bg-[#f8fafc] pt-24 pb-20">
+      <Helmet>
+        {/* Primary Page Title (Max 60 chars) */}
+        <title>About Us | Academic Options Mission, Vision & Leaders</title>
+
+        {/* Meta Description (Max 160 chars, Google E-E-A-T compliant) */}
+        <meta 
+          name="description" 
+          content="Discover Academic Options: our 10-year journey, core values of integrity and innovation, and the executive leadership team empowering 15K+ global placements." 
+        />
+        <link rel="canonical" href="https://academicoptions.com/about" />
+
+        {/* Open Graph Meta Tags */}
+        <meta property="og:title" content="About Us | Academic Options Mission, Vision & Leaders" />
+        <meta property="og:description" content="Discover Academic Options: our 10-year journey, core values of integrity and innovation, and the executive leadership team empowering 15K+ global placements." />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://academicoptions.com/about" />
+        <meta property="og:image" content="https://academicoptions.com/logo.png" />
+        <meta property="og:site_name" content="Academic Options" />
+
+        {/* Twitter Card Meta Tags */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="About Academic Options | Our Mission & Leadership" />
+        <meta name="twitter:description" content="Empowering the academic-to-corporate transition through visionary mentorship and industry pathways." />
+        <meta name="twitter:image" content="https://academicoptions.com/logo.png" />
+
+        {/* Schema.org Structured Data */}
+        <script type="application/ld+json">
+          {JSON.stringify(aboutStructuredData)}
+        </script>
+        <script type="application/ld+json">
+          {JSON.stringify(breadcrumbData)}
+        </script>
+      </Helmet>
       
       {/* 1. Hero Section */}
       <section className="pt-10 pb-16 md:pb-24">

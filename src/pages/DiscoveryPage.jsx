@@ -1,4 +1,26 @@
+/**
+ * @file DiscoveryPage.jsx
+ * @description Interactive College Discovery Engine.
+ * Allows students to browse, filter, and compare universities across India
+ * based on location, academic specialization, and tuition fee brackets.
+ * 
+ * Features:
+ * - Dynamic filtering by city, discipline, and fee range
+ * - College comparison drawer (up to 3 institutions simultaneously)
+ * - Stack format layout to seamlessly accommodate new university cards
+ * - Direct application / inquiry modal triggers
+ * 
+ * SEO Optimization:
+ * - Search-engine-friendly title and high-intent meta description
+ * - CollectionPage & ItemList Schema.org structured data for university listings
+ * - Open Graph & Twitter Cards
+ * 
+ * @param {Object} props
+ * @param {(programName?: string) => void} props.onOpenApply - Opens the consultation modal
+ */
+
 import React, { useState } from 'react';
+import { Helmet } from 'react-helmet-async';
 import { 
   MapPin, 
   GraduationCap, 
@@ -17,6 +39,7 @@ import {
 import { colleges as defaultColleges } from '../data/colleges';
 
 export default function DiscoveryPage({ onOpenApply }) {
+  // Filter and comparison UI states
   const [selectedCity, setSelectedCity] = useState('All Cities');
   const [selectedSpec, setSelectedSpec] = useState('All');
   const [selectedFee, setSelectedFee] = useState('Any Range');
@@ -32,6 +55,7 @@ export default function DiscoveryPage({ onOpenApply }) {
     { name: 'Biotech', spec: 'Medical' }
   ];
 
+  // Filtering pipeline for university cards
   const filteredColleges = initialColleges.filter((college) => {
     const matchesCity = selectedCity === 'All Cities' || college.city.toLowerCase() === selectedCity.toLowerCase();
     const matchesSpec = selectedSpec === 'All' || college.specialization.toLowerCase() === selectedSpec.toLowerCase();
@@ -50,6 +74,7 @@ export default function DiscoveryPage({ onOpenApply }) {
     return matchesCity && matchesSpec && matchesFee;
   });
 
+  // Manages the multi-college comparison tray (maximum 3 colleges)
   const toggleCompare = (college) => {
     if (comparedColleges.some(c => c.id === college.id)) {
       setComparedColleges(comparedColleges.filter(c => c.id !== college.id));
@@ -60,8 +85,86 @@ export default function DiscoveryPage({ onOpenApply }) {
     }
   };
 
+  // Structured Data (JSON-LD) for CollectionPage & ItemList of colleges
+  const discoveryStructuredData = {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    "name": "College Discovery Engine - Academic Options",
+    "url": "https://academicoptions.com/discovery",
+    "description": "Explore and compare top colleges in India by fees, location, exams, and placement rates.",
+    "mainEntity": {
+      "@type": "ItemList",
+      "itemListElement": defaultColleges.map((college, index) => ({
+        "@type": "ListItem",
+        "position": index + 1,
+        "item": {
+          "@type": "EducationalOrganization",
+          "name": college.name,
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": college.city,
+            "addressCountry": "IN"
+          },
+          "description": college.tagline || college.name
+        }
+      }))
+    }
+  };
+
+  const discoveryBreadcrumbs = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://academicoptions.com/"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "College Discovery",
+        "item": "https://academicoptions.com/discovery"
+      }
+    ]
+  };
+
   return (
     <div className="bg-[#f8fafc] pt-24 pb-20 min-h-screen">
+      <Helmet>
+        {/* Primary Page Title (Max 60 chars) */}
+        <title>College Discovery Engine | Compare Top Indian Universities</title>
+
+        {/* Meta Description (Max 160 chars, CTR optimized) */}
+        <meta 
+          name="description" 
+          content="Compare accredited colleges in India by fees, location, exams, and placement rates. Explore IITs, IIMs, and BITS Pilani with real career outcomes data." 
+        />
+        <link rel="canonical" href="https://academicoptions.com/discovery" />
+
+        {/* Open Graph Meta Tags */}
+        <meta property="og:title" content="College Discovery Engine | Compare Top Indian Universities" />
+        <meta property="og:description" content="Compare accredited colleges in India by fees, location, exams, and placement rates with verified data." />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://academicoptions.com/discovery" />
+        <meta property="og:image" content="https://academicoptions.com/logo.png" />
+        <meta property="og:site_name" content="Academic Options" />
+
+        {/* Twitter Card Meta Tags */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="College Discovery Engine | Academic Options" />
+        <meta name="twitter:description" content="Find and compare your ideal university in India using our intelligent data engine." />
+        <meta name="twitter:image" content="https://academicoptions.com/logo.png" />
+
+        {/* Structured Data for Google Indexing */}
+        <script type="application/ld+json">
+          {JSON.stringify(discoveryStructuredData)}
+        </script>
+        <script type="application/ld+json">
+          {JSON.stringify(discoveryBreadcrumbs)}
+        </script>
+      </Helmet>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Page Title & Subtitle */}

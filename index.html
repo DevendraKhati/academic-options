@@ -1,18 +1,79 @@
 <!doctype html>
-<html lang="en" class="scroll-smooth">
+<html lang="en" dir="ltr" class="scroll-smooth">
   <head>
+    <!-- Character Encoding & Core Viewport -->
     <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+    <!-- Favicon & Touch Icons -->
     <link rel="icon" type="image/png" href="/favicon.png" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Academic Options - Bridging the Gap between Ambition and Opportunity</title>
-    <meta name="description" content="Empowering graduates with real-world skills, industry-ready experience, and top tier placement pathways. Join fast-growing companies and accelerate your career journey." />
-    <!-- Fonts -->
+    <link rel="apple-touch-icon" href="/favicon.png" />
+
+    <!-- Google Search Engine Indexing & Robots Directives (Latest Google Helpful Content Guidelines) -->
+    <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
+    <meta name="googlebot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
+    <meta name="theme-color" content="#2563eb" />
+    <meta name="author" content="Academic Options" />
+
+    <!-- Default Fallback Title & Meta Description (Overridden dynamically per page via react-helmet-async) -->
+    <title>Academic Options | College to Corporate Career Launchpad</title>
+    <meta name="description" content="Bridging the gap between ambition and opportunity. Empowering graduates with industry bootcamps, corporate internships, and accredited college discovery in India." />
+    <meta name="keywords" content="academic options, college discovery india, campus to cubicle, tech bootcamps, corporate placement, student internships, lucknow education consultancy" />
+    <link rel="canonical" href="https://academicoptions.com/" />
+
+    <!-- Open Graph (OG) Meta Tags for Social Previews & Google Discover Cards -->
+    <meta property="og:site_name" content="Academic Options" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Academic Options | College to Corporate Career Launchpad" />
+    <meta property="og:description" content="Empowering graduates with real-world skills, industry-ready experience, and top tier placement pathways. Join fast-growing companies and accelerate your career journey." />
+    <meta property="og:url" content="https://academicoptions.com/" />
+    <meta property="og:image" content="https://academicoptions.com/logo.png" />
+    <meta property="og:image:alt" content="Academic Options - Explore. Learn. Achieve." />
+    <meta property="og:locale" content="en_US" />
+
+    <!-- Twitter Card Meta Tags for Enhanced Engagement on X / Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Academic Options | College to Corporate Career Launchpad" />
+    <meta name="twitter:description" content="Bridging the gap between ambition and opportunity through industry-led bootcamps, university discovery, and corporate placement." />
+    <meta name="twitter:image" content="https://academicoptions.com/logo.png" />
+
+    <!-- Performance & Font Optimization: Preconnect & DNS-Prefetch to reduce LCP latency -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Global Organization Structured Data (JSON-LD) for Google Knowledge Graph -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "EducationalOrganization",
+      "name": "Academic Options",
+      "url": "https://academicoptions.com",
+      "logo": "https://academicoptions.com/logo.png",
+      "description": "Bridging the gap between ambition and opportunity with career bootcamps, university admissions counseling, and corporate placement.",
+      "telephone": "+91-7303261295",
+      "email": "hello@academicoptions.com",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Adil Nagar, Kalyanpur",
+        "addressLocality": "Lucknow",
+        "addressRegion": "Uttar Pradesh",
+        "postalCode": "22022",
+        "addressCountry": "IN"
+      },
+      "sameAs": [
+        "https://www.linkedin.com/company/academic-options",
+        "https://twitter.com/academicoptions"
+      ]
+    }
+    </script>
   </head>
   <body class="bg-[#f8fafc] text-slate-900 font-sans antialiased selection:bg-brand-500 selection:text-white min-h-screen">
+    <!-- React Root Mount Point -->
     <div id="root"></div>
+
+    <!-- Main Client Bundle Entrypoint -->
     <script type="module" src="/src/main.jsx"></script>
   </body>
 </html>

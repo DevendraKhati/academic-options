@@ -81,12 +81,73 @@ export default function ContactPage({ onOpenApply }) {
     }
   };
 
+  // FAQPage Schema structured data for Google Rich Results
+  const faqStructuredData = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": faqs.map((f) => ({
+      "@type": "Question",
+      "name": f.question,
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": f.answer
+      }
+    }))
+  };
+
+  const contactBreadcrumbs = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://academicoptions.com/"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Contact Us",
+        "item": "https://academicoptions.com/contact"
+      }
+    ]
+  };
+
   return (
     <main className="min-h-screen bg-slate-50 pt-28 pb-20">
       <Helmet>
-        <title>Contact Us | Academic Options</title>
-        <meta name="description" content="Get in touch with Academic Options. Whether you're a student seeking growth or a corporation looking for talent, we're here to connect." />
+        {/* Primary Page Title (Max 60 chars) */}
+        <title>Contact Academic Options | Lucknow Office & Support</title>
+
+        {/* Meta Description (Max 160 chars) */}
+        <meta 
+          name="description" 
+          content="Get in touch with Academic Options. Visit our Lucknow center, call +91-7303261295, or send an inquiry for bootcamps, partnerships, and admissions counseling." 
+        />
         <link rel="canonical" href="https://academicoptions.com/contact" />
+
+        {/* Open Graph Meta Tags */}
+        <meta property="og:title" content="Contact Academic Options | Lucknow Office & Inquiries" />
+        <meta property="og:description" content="Get in touch with Academic Options. Connect with our team for student bootcamps, enterprise partnerships, and career counseling." />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://academicoptions.com/contact" />
+        <meta property="og:image" content="https://academicoptions.com/logo.png" />
+        <meta property="og:site_name" content="Academic Options" />
+
+        {/* Twitter Card Meta Tags */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Contact Academic Options | Lucknow Office" />
+        <meta name="twitter:description" content="Reach out to Academic Options for career development, enterprise partnerships, and admissions counseling." />
+        <meta name="twitter:image" content="https://academicoptions.com/logo.png" />
+
+        {/* Google Rich FAQ & Breadcrumb Structured Data */}
+        <script type="application/ld+json">
+          {JSON.stringify(faqStructuredData)}
+        </script>
+        <script type="application/ld+json">
+          {JSON.stringify(contactBreadcrumbs)}
+        </script>
       </Helmet>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

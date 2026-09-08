@@ -14,6 +14,7 @@
  */
 
 import React, { useState } from 'react';
+import { Helmet } from 'react-helmet-async';
 import { 
   Sparkles, 
   ArrowDown, 
@@ -84,8 +85,51 @@ export default function ImpactPage({ onOpenApply }) {
     return matchesCity && matchesSpec && matchesExam;
   });
 
+  const impactBreadcrumbData = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://academicoptions.com/"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Social Impact",
+        "item": "https://academicoptions.com/impact"
+      }
+    ]
+  };
+
   return (
     <div className="bg-[#f8fafc] pt-24 pb-20">
+      <Helmet>
+        <title>Social Impact Programs & Olympiads | Academic Options</title>
+        <meta 
+          name="description" 
+          content="Explore our social impact programs: Mindful Campus wellness, Eco-Bridge ESG initiatives, National Student Olympiads, and Honorary Doctorate recognitions." 
+        />
+        <link rel="canonical" href="https://academicoptions.com/impact" />
+
+        <meta property="og:title" content="Social Impact Programs & Olympiads | Academic Options" />
+        <meta property="og:description" content="Explore our social impact programs: Mindful Campus wellness, Eco-Bridge ESG initiatives, National Student Olympiads, and Honorary Doctorate recognitions." />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://academicoptions.com/impact" />
+        <meta property="og:image" content="https://academicoptions.com/logo.png" />
+        <meta property="og:site_name" content="Academic Options" />
+
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Social Impact & Programs | Academic Options" />
+        <meta name="twitter:description" content="Empowering the next generation with social consciousness, competitive excellence, and global recognition." />
+        <meta name="twitter:image" content="https://academicoptions.com/logo.png" />
+
+        <script type="application/ld+json">
+          {JSON.stringify(impactBreadcrumbData)}
+        </script>
+      </Helmet>
       
       {/* 1. Hero Section */}
       <section className="pt-10 pb-16 md:pb-24">
