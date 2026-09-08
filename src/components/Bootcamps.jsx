@@ -14,6 +14,7 @@
  */
 
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { 
   Megaphone, 
   Cpu, 
@@ -123,13 +124,19 @@ export default function Bootcamps({ onOpenApply }) {
                 </div>
 
                 {/* Bottom Action Button */}
-                <div className="pt-4 border-t border-slate-100">
-                  <button
-                    onClick={() => onOpenApply(`Bootcamp: ${camp.title}`)}
+                <div className="pt-4 border-t border-slate-100 flex items-center justify-between">
+                  <Link
+                    to="/bootcamps"
                     className="inline-flex items-center text-xs font-bold text-brand-600 hover:text-brand-700 transition-colors group/btn"
                   >
-                    <span>Learn More</span>
+                    <span>Curriculum & Cohorts</span>
                     <ArrowRight className="w-3.5 h-3.5 ml-1 group-hover/btn:translate-x-1 transition-transform" />
+                  </Link>
+                  <button
+                    onClick={() => onOpenApply(`Bootcamp: ${camp.title}`)}
+                    className="text-xs font-semibold text-slate-500 hover:text-brand-600 transition-colors cursor-pointer"
+                  >
+                    Apply Now
                   </button>
                 </div>
               </div>
@@ -139,13 +146,13 @@ export default function Bootcamps({ onOpenApply }) {
 
         {/* Center Action Button */}
         <div className="mt-14 text-center">
-          <button
-            onClick={() => onOpenApply('View all Bootcamps')}
-            className="inline-flex items-center justify-center px-8 py-3.5 text-sm font-semibold text-white bg-brand-600 hover:bg-brand-700 rounded-full shadow-lg shadow-brand-600/25 hover:shadow-xl hover:shadow-brand-600/35 hover:-translate-y-0.5 transition-all duration-200"
+          <Link
+            to="/bootcamps"
+            className="inline-flex items-center justify-center px-8 py-3.5 text-sm font-semibold text-white bg-brand-600 hover:bg-brand-700 rounded-full shadow-lg shadow-brand-600/25 hover:shadow-xl hover:shadow-brand-600/35 hover:-translate-y-0.5 transition-all duration-200 cursor-pointer"
           >
-            <span>View all Bootcamps</span>
+            <span>Explore All Technical Bootcamps</span>
             <ArrowRight className="w-4 h-4 ml-2" />
-          </button>
+          </Link>
         </div>
 
       </div>

@@ -115,6 +115,11 @@ export default function Navbar({ onOpenApply }) {
                 <Link
                   key={link.name}
                   to={link.path}
+                  onClick={() => {
+                    if (isCurrent) {
+                      window.scrollTo({ top: 0, behavior: 'smooth' });
+                    }
+                  }}
                   className={`px-3 py-1.5 text-xs font-semibold rounded-lg transition-colors ${
                     isCurrent
                       ? 'text-brand-600 bg-brand-50 font-bold border-b-2 border-brand-600'
@@ -205,7 +210,12 @@ export default function Navbar({ onOpenApply }) {
                 <Link
                   key={link.name}
                   to={link.path}
-                  onClick={() => setMobileMenuOpen(false)}
+                  onClick={() => {
+                    setMobileMenuOpen(false);
+                    if (location.pathname === link.path) {
+                      window.scrollTo({ top: 0, behavior: 'smooth' });
+                    }
+                  }}
                   className={`px-3 py-2 text-sm font-semibold rounded-lg ${
                     location.pathname === link.path
                       ? 'text-brand-600 bg-brand-50 font-bold'
