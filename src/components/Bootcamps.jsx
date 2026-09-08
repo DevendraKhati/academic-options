@@ -150,7 +150,7 @@ export default function Bootcamps({ onOpenApply }) {
             to="/bootcamps"
             className="inline-flex items-center justify-center px-8 py-3.5 text-sm font-semibold text-white bg-brand-600 hover:bg-brand-700 rounded-full shadow-lg shadow-brand-600/25 hover:shadow-xl hover:shadow-brand-600/35 hover:-translate-y-0.5 transition-all duration-200 cursor-pointer"
           >
-            <span>Explore All Technical Bootcamps</span>
+            <span>View all Bootcamps</span>
             <ArrowRight className="w-4 h-4 ml-2" />
           </Link>
         </div>
