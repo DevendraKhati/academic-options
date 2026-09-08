@@ -55,14 +55,24 @@ export default function ContactPage({ onOpenApply }) {
     setSubmitError('');
     setSubmitSuccess(false);
 
+    const trimmedName = formData.name.trim();
+    const trimmedEmail = formData.email.trim();
+    const trimmedMessage = formData.message.trim();
+
+    if (!trimmedName || !trimmedEmail || !formData.subject) {
+      setSubmitError('Please complete all required fields.');
+      setIsSubmitting(false);
+      return;
+    }
+
     const result = await submitFormToEmail({
       formName: 'Contact Us Form',
-      replyTo: formData.email,
+      replyTo: trimmedEmail,
       data: {
-        'Full Name': formData.name,
-        'Email Address': formData.email,
+        'Full Name': trimmedName,
+        'Email Address': trimmedEmail,
         'Subject / Inquiry': formData.subject,
-        'Message': formData.message
+        'Message': trimmedMessage || 'No message content'
       }
     });
 
@@ -201,6 +211,7 @@ export default function ContactPage({ onOpenApply }) {
                     type="text" 
                     id="name" 
                     required
+                    maxLength={100}
                     value={formData.name}
                     onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                     className="w-full px-4 py-3 rounded-xl bg-slate-50 border border-slate-200 focus:outline-none focus:ring-2 focus:ring-brand-500/50 focus:border-brand-500 transition-colors"
@@ -213,6 +224,7 @@ export default function ContactPage({ onOpenApply }) {
                     type="email" 
                     id="email" 
                     required
+                    maxLength={120}
                     value={formData.email}
                     onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                     className="w-full px-4 py-3 rounded-xl bg-slate-50 border border-slate-200 focus:outline-none focus:ring-2 focus:ring-brand-500/50 focus:border-brand-500 transition-colors"
@@ -246,6 +258,7 @@ export default function ContactPage({ onOpenApply }) {
                   id="message" 
                   rows={5}
                   required
+                  maxLength={2000}
                   value={formData.message}
                   onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                   className="w-full px-4 py-3 rounded-xl bg-slate-50 border border-slate-200 focus:outline-none focus:ring-2 focus:ring-brand-500/50 focus:border-brand-500 transition-colors resize-none"

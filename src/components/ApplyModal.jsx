@@ -58,15 +58,26 @@ export default function ApplyModal({ isOpen, onClose, initialProgram = '' }) {
     setIsSubmitting(true);
     setSubmitError('');
 
+    const trimmedFullName = formData.fullName.trim();
+    const trimmedEmail = formData.email.trim();
+    const trimmedPhone = formData.phone.trim();
+    const trimmedMessage = formData.message.trim();
+
+    if (!trimmedFullName || !trimmedEmail || !formData.inquiryType) {
+      setSubmitError('Please complete all required fields.');
+      setIsSubmitting(false);
+      return;
+    }
+
     const result = await submitFormToEmail({
       formName: 'Consultation & Application Form',
-      replyTo: formData.email,
+      replyTo: trimmedEmail,
       data: {
-        'Full Name': formData.fullName,
-        'Email Address': formData.email,
-        'Phone Number': formData.phone || 'Not provided',
+        'Full Name': trimmedFullName,
+        'Email Address': trimmedEmail,
+        'Phone Number': trimmedPhone || 'Not provided',
         'Inquiry Type': formData.inquiryType,
-        'Message': formData.message || 'No additional message provided'
+        'Message': trimmedMessage || 'No additional message provided'
       }
     });
 
@@ -175,6 +186,7 @@ export default function ApplyModal({ isOpen, onClose, initialProgram = '' }) {
                   <input
                     type="text"
                     required
+                    maxLength={100}
                     placeholder="Jane Doe"
                     value={formData.fullName}
                     onChange={(e) => setFormData({ ...formData, fullName: e.target.value })}
@@ -189,6 +201,7 @@ export default function ApplyModal({ isOpen, onClose, initialProgram = '' }) {
                   <input
                     type="email"
                     required
+                    maxLength={120}
                     placeholder="jane@example.com"
                     value={formData.email}
                     onChange={(e) => setFormData({ ...formData, email: e.target.value })}
@@ -205,6 +218,7 @@ export default function ApplyModal({ isOpen, onClose, initialProgram = '' }) {
                   </label>
                   <input
                     type="tel"
+                    maxLength={25}
                     placeholder="+1 (555) 000-0000"
                     value={formData.phone}
                     onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
@@ -244,6 +258,7 @@ export default function ApplyModal({ isOpen, onClose, initialProgram = '' }) {
                 </label>
                 <textarea
                   rows={4}
+                  maxLength={2000}
                   placeholder="Tell us about your goals..."
                   value={formData.message}
                   onChange={(e) => setFormData({ ...formData, message: e.target.value })}
